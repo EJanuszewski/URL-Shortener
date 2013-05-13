@@ -28,15 +28,19 @@ $url = "";
 //Connect to database
 mysql_connect("localhost","admin","");
 mysql_select_db("urlshortener");
-
-function createHash($url) {
-	$chars = range("a","z");
+Class functions {
+	//Generates a url hash
 	function hashLoop() {
 		while(strlen($returnHash) < 5) {
 			$returnHash .= $chars[rand(0,count($chars))];
 		}
 	}
-	hashLoop();
+
+}
+function createHash($url) {
+	$chars = range("a","Z");
+	hashLoop();	
+	}
 //	$num = mysql_num_rows(mysql_query("SELECT `hash` FROM `url` WHERE `hash` = '".$returnHash."'"));
 //	if ($num == 0) { echo $returnHash;} else {hashLoop();}
 	echo $returnHash;
