@@ -24,8 +24,10 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 error_reporting(E_ALL);
+ini_set('display_errors',1);
 
+require_once('hashUtil.php');
 require_once('db.php');
-createHash("someurl.com");
+hashUtil::createHash("someurl.com");
 
 ?>
