@@ -26,11 +26,11 @@ License: GPL2
 error_reporting(E_ALL);
 $url = "";
 //Connect to database
-mysql_connect("localhost","admin","3J4nu5z3w5k1");
+mysql_connect("localhost","admin","");
 mysql_select_db("urlshortener");
 
 function createHash($url) {
-	$chars = range("a","Z");
+	$chars = range("a","z");
 	function hashLoop() {
 		while(strlen($returnHash) < 5) {
 			$returnHash .= $chars[rand(0,count($chars))];
