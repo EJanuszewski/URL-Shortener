@@ -24,27 +24,27 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 error_reporting(E_ALL);
-$url = "";
+
 //Connect to database
 mysql_connect("localhost","admin","");
 mysql_select_db("urlshortener");
-Class functions {
+class HashUtil {
 	//Generates a url hash
-	function hashLoop() {
+	public function hashLoop() {
 		while(strlen($returnHash) < 5) {
-			$returnHash .= $chars[rand(0,count($chars))];
+			$returnHash .= $chars[rand(0,count($chars)-1)];
 		}
 	}
 
 }
 function createHash($url) {
 	$chars = range("a","Z");
-	hashLoop();	
+	hashLoop();
 	}
 //	$num = mysql_num_rows(mysql_query("SELECT `hash` FROM `url` WHERE `hash` = '".$returnHash."'"));
 //	if ($num == 0) { echo $returnHash;} else {hashLoop();}
 	echo $returnHash;
-}
+
 function redirectURL($url) {
 	
 
