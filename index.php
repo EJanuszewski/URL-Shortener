@@ -28,6 +28,6 @@ ini_set('display_errors',1);
 
 require_once('hashUtil.php');
 require_once('db.php');
-echo hashUtil::createHash("someurl.com", 10);
+echo hashUtil::createHash("someurl.com", $hashLength);
 
 ?>
