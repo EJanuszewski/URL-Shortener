@@ -1,16 +1,14 @@
 <?php
-class Config {
-	public function config() {
-		$host = "localhost"; //Database host
-		$user = "root"; //Database user
-		$password = "YOURPASSWORD"; //Database password
-		$name = "urlshortener"; //Database name to store data
-		$table = "url"; //Database table name
-		//Connect to database
-		$db = new PDO('mysql:host='.$host.';dbname='.$name,$user,$password);
-		if(!defined("DEFAULT_HASH_LENGTH")) define("DEFAULT_HASH_LENGTH",10);
-		if(!defined("TABLE")) define("TABLE",$table);
-		return $db;
-	}
-}
+	// Database credentials
+	define('DB_HOST', 'localhost');
+	define('DB_USER', 'yourusername');
+	define('DB_PASSWORD', 'yourpassword');
+	define('DB_NAME', 'urlshortener');
+	define('DB_TYPE', 'mysql');
+	
+	// Available tables
+	define('TBL_URL', 'url');
+	
+	// Miscellaneous
+	define('DEFAULT_HASH_LENGTH', 6);	
 ?>
