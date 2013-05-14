@@ -1,10 +1,16 @@
 <?php
-$host = "localhost" //Database host
-$user = "admin"; //Database user
-$password = ""; //Database password
-$table = "urlshortener"; //Database table to store data
-$hashLength = 10;
-//Connect to database
-mysql_connect($host,$user,$password);
-mysql_select_db($table);
+class Config {
+	public function config() {
+		$host = "localhost"; //Database host
+		$user = "root"; //Database user
+		$password = "YOURPASSWORD"; //Database password
+		$name = "urlshortener"; //Database name to store data
+		$table = "url"; //Database table name
+		//Connect to database
+		$db = new PDO('mysql:host='.$host.';dbname='.$name,$user,$password);
+		if(!defined("DEFAULT_HASH_LENGTH")) define("DEFAULT_HASH_LENGTH",10);
+		if(!defined("TABLE")) define("TABLE",$table);
+		return $db;
+	}
+}
 ?>

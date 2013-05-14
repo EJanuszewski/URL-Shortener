@@ -26,8 +26,12 @@ License: GPL2
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 
-require_once('hashUtil.php');
-require_once('db.php');
-echo hashUtil::createHash("someurl.com", $hashLength);
+require_once("config.php");
+$config = new Config();
+$db = $config->config();
+require_once("hashUtil.php");
+
+//echo hashUtil::createHash("someurl.com", "Ed", DEFAULT_HASH_LENGTH, $db);
+//echo hashUtil::redirectUrl("tmtnzdxmua", $db);
 
 ?>
