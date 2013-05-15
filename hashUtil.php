@@ -1,34 +1,31 @@
 <?php
 class hashUtil {
 	//Creates a hash
-	public function createHash($url, $author, $length, $db) {
-		$returnHash = "";
-		$returnHash = self::hashLoop($length);
-		mysql_select_db(TABLE);
-		$r = $db->query("SELECT COUNT(*) AS num FROM `".TABLE."` WHERE `hash` = '".$returnHash."'");
+	public function createHash($vars, $db, $returnHash = "") {
+		$returnHash = self::hashLoop();
+		$r = $db->query("SELECT COUNT(*) AS num FROM `".TBL_URL."` WHERE `hash` = '".$returnHash."'");
 		$rArr = $r->fetchAll();
 		if($rArr[0]['num'] > 0) {
-			$returnHash = self::hashLoop($length);
+			$returnHash = self::hashLoop();
 		} else {
-			$q = "INSERT INTO `".TABLE."` (`hash`,`url`,`author`) VALUES ('".$returnHash."','".$url."','".$author."')";
+			$q = "INSERT INTO `".TBL_URL."` (`hash`,`url`,`author`) VALUES ('".$returnHash."','".$vars['url']."','".$vars['url']."')";
 			$db->query($q);
 		}
 			return $returnHash;
 	}
 
 	//Creates a hash and returns it
-	private function hashLoop($length) {
-		$chars = array_merge(range("a","z"),range(0,9));
-		$returnHash = "";
-		while(strlen($returnHash) < $length) {
-			$returnHash .= $chars[rand(0,count($chars)-1)];
-
+	private function hashLoop($returnHash = "") {
+		$c = array_merge(range("a","z"),range(0,9));
+		//Generate a hash as long as the specified length
+		while(strlen($returnHash) < DEFAULT_HASH_LENGTH) {
+			$returnHash .= $c[rand(0,count($c)-1)];
 		}
 		return $returnHash;
 	}
 	public function redirectURL($hash, $db) {
 	//Redirect to the intended url
-		$q = $db->query("SELECT `url` FROM `".TABLE."` WHERE `hash` = '".$hash."' LIMIT 1");
+		$q = $db->query("SELECT `url` FROM `".TBL_URL."` WHERE `hash` = '".$hash."' LIMIT 1");
 		while($row = $q->fetch()) {
 			$u = $row['url'];
 		}
@@ -36,9 +33,9 @@ class hashUtil {
 		$pU = parse_url($u);
 		if(empty($pU['scheme'])) $u = "http://$u";
 		//Add a hit into the database
-		$db->query("UPDATE `".TABLE."` SET `count` = `count`+1 WHERE `hash` = '".$hash."'");
+		$db->query("UPDATE `".TBL_URL."` SET `count` = `count`+1 WHERE `hash` = '".$hash."'");
 		//Redirect to the full URL
-		header("Location:".$pU);	
+		header("Location:".$u);	
 	}
 }
 

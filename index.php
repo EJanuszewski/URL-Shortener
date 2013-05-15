@@ -27,11 +27,12 @@ error_reporting(E_ALL);
 ini_set('display_errors',1);
 
 require_once("config.php");
-$config = new Config();
-$db = $config->config();
 require_once("hashUtil.php");
 
-//echo hashUtil::createHash("someurl.com", "Ed", DEFAULT_HASH_LENGTH, $db);
-//echo hashUtil::redirectUrl("tmtnzdxmua", $db);
+if(!empty($_GET['redirect'])) hashUtil::redirectUrl($_GET['redirect'], $db);
+if(!empty($_GET['url'])) hashUtil::createHash($_GET, $db);
+
+//echo hashUtil::createHash($_GET, $db);
+//echo hashUtil::redirectUrl("x8eauq", $db);
 
 ?>
