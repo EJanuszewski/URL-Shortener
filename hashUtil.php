@@ -16,7 +16,7 @@ class hashUtil {
 
 	//Creates a hash and returns it
 	private function hashLoop($returnHash = "") {
-		$c = array_merge(range("a","z"),range(0,9));
+		$c = str_split(HASH_CHARACTERS);
 		//Generate a hash as long as the specified length
 		while(strlen($returnHash) < DEFAULT_HASH_LENGTH) {
 			$returnHash .= $c[rand(0,count($c)-1)];

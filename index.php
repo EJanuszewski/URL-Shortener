@@ -32,7 +32,11 @@ require_once("hashUtil.php");
 if(!empty($_GET['redirect'])) hashUtil::redirectUrl($_GET['redirect'], $db);
 if(!empty($_GET['url'])) hashUtil::createHash($_GET, $db);
 
-//echo hashUtil::createHash($_GET, $db);
+/*
+$_GET['url'] = 'http://www.ejanuszewski.com';
+$_GET['author'] = 'Edward';
+echo hashUtil::createHash($_GET, $db);
+*/
 //echo hashUtil::redirectUrl("x8eauq", $db);
 
 ?>
